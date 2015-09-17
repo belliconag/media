@@ -196,7 +196,8 @@ class AssetInterfaceConverter extends PersistentObjectConverter {
 		}
 
 		if ($object === NULL) {
-			if ($configuration !== NULL && $configuration->getConfigurationValue(self::class, self::CONFIGURATION_ONE_PER_RESOURCE) === TRUE && isset($convertedChildProperties['resource'])) {
+			// TODO: This is a fix for 2.0 that you can have binary identical assets with different name. Should be fixed in 2.0, the following is the original line: if ($configuration !== NULL && $configuration->getConfigurationValue(self::class, self::CONFIGURATION_ONE_PER_RESOURCE) === TRUE && isset($convertedChildProperties['resource'])) {
+			if ($configuration !== NULL && FALSE && isset($convertedChildProperties['resource'])) {
 				$resource = $convertedChildProperties['resource'];
 				$possibleAsset = $this->assetRepository->findOneByResourceSha1($resource->getSha1());
 				if ($possibleAsset !== NULL) {
